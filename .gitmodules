@@ -1,0 +1,3 @@
+[submodule "AppuntiSilabGVNG"]
+	path = AppuntiSilabGVNG
+	url = git@github.com:MarcoBuster/sweng.git
