@@ -153,6 +153,16 @@ Interfaccia inter = Mockito.mock(Interfaccia.class);
 Mockito.when(inter....()).thenReturn(...);
 // chiamare metodo di default vero
 Mockito.when(inter.metodo()).thenCallRealMethod();
+
+assertThat(inter.metodo()).isEqualTo(...);
+```
+
+È possibile verificare anche proprietà sui metodi finti.
+
+```java
+// verificare che il metodo met di oggettoFinto sia chiamato tot volte
+Mockito.verify(oggettoFinto, Mockito.times(4)).met();
+Mockito.verify(oggettoFinto, Mockito.atLeast(2))).met();
 ```
 
 ## Dependency injection
