@@ -9,7 +9,7 @@ Tutta via i linguaggi Object Oriented, gestiscono solamente classi con istanze m
 <span style=color:yellow>getInstance</span> := Restituisce a chi lo chiama l'unica istanza della classe, creandola tramite il costruttore privato se questa non è già presente. 
 <b><u>L'istanza è memorizzata in una attributo statico della classe</u></b>, così da poterla restituire a chi ne ha bisogno.  
 
-               ![[Pasted image 20231117102432.png]]
+               ![[Pastedimage20231117102432.png]]
 
 ```java
 public class Singleton { 
