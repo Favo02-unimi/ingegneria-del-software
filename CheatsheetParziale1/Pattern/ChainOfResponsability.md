@@ -9,7 +9,7 @@ concatenando i gestori.
 
 il metodo <span style=color:yellow>evaluate</span>, implementa la logica decisionale che <b><u>permette di stabilire se il gestore è in grado di gestire la richiesta</b></u> . Se non è in grado, viene chiamato lo stesso metodo su un altro gestore ottenuto come parametro al momento della costruzione. 
 
-![[Pasted image 20231119103202.png]]
+![[Pastedimage20231119103202.png]]
 
 <span style=color:cyan;font-size:30px>Testing</span>
 
