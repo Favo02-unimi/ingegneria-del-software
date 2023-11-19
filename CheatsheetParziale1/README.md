@@ -7,6 +7,7 @@
 - [Mocking](#mocking)
 - [Dependency injection](#dependency-injection)
 - [Decoratori `BeforeEach`, `Nested`](#decoratori-beforeeach-nested)
+- [Pattern](#pattern)
 
 ## Testing
 
@@ -109,7 +110,7 @@ public static Card toCard(String cardString) {
 }
 ```
 
-_Classe completa: [TestCardUtils.java](./TestCardUtils.java)_
+_Classe completa: [TestCardUtils.java](./CodiceEsempi/TestCardUtils.java)_
 
 ```java
 @ParameterizedTest
@@ -245,7 +246,11 @@ class PuffoTest {
 }
 ```
 
-Esempi completi di utilizzo: [MazziereTest.java](./MazziereTest.java), [SfidanteTest.java](./SfidanteTest.java)
+Esempi completi di utilizzo: [MazziereTest.java](./CodiceEsempi/MazziereTest.java), [SfidanteTest.java](./CodiceEsempi/SfidanteTest.java)
+
 ## Pattern
 
-Work in progress...
+- [Chain of responsability](./Pattern/ChainOfResponsability.md)
+- [Flyweight](./Pattern/Flyweight.md)
+- [Iterator](./Pattern/Iterator.md)
+- [Singleton](./Pattern/Singleton.md)
