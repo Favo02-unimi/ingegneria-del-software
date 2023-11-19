@@ -1,4 +1,4 @@
-Iterator
+### Iterator
 <span style=color:green>Obbiettivo</span> := Gli oggetti che definiamo, possono contenere una collezione di altri oggetti, sulla quale è auspicabile poter effettuare particolari operazioni. é molto probabile che vorremmo <b><u>poter iterare sui singoli elementi della collezione, senza esporre la rappresentazione interna utilizzata per contenerli.</u></b>  
 
 <span style=color:cyan>Come</span> := Java supporta largamente il pattern iterator, a tal punto che nella libreria standard esiste una interfaccia generica per gli iteratori <span style=color:red>Iterator E</span>, al suo interno sono definiti i metodi:
