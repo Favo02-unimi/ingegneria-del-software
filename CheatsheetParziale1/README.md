@@ -174,13 +174,18 @@ Puffo puffoMockato = Mockito.mock(Puffo.class);
 
 // lancia sempre l'eccezione
 Mockito.when(puffoMockato.err()).thenThrow(new IllegalArgumentException());
+
 // restituisce sempre blu
 Mockito.when(puffoMockato.colore()).thenReturn("Blu");
+
 // restituisce alla prima chiama blu, poi verde e poi sempre giallo
 Mockito.when(puffoMockato.colore()).thenReturn("Blu", "Verde", "Giallo");
+
 // restituire uno alla volta gli elementi di una lista
 Mockito.when(mazziereMockato.hit())
         .thenAnswer(AdditionalAnswers.returnsElementsOf(lista));
+
+
 // simulare la modifica dello stato della classe mockata
 // dopo che viene chiamato mazziereMockato.setNome() viene impostato
 // come risultato di getNome il primo argomento di setNome()
@@ -200,13 +205,33 @@ Interfaccia inter = Mockito.mock(Interfaccia.class);
 
 // altri metodi interfaccia usati nel default da testare
 Mockito.when(inter....()).thenReturn(...);
+
 // chiamare metodo di default vero
 Mockito.when(inter.metodo()).thenCallRealMethod();
 
 assertThat(inter.metodo()).isEqualTo(...);
 ```
 
-È possibile verificare anche proprietà sui metodi finti, questo è utile per verificare che metodi `void` vengano chiamati.
+<u><b>Verify, viene utilizzato per controllare quante volte viene chiamato un certo metodo su un qualunque oggetto spy o mock</u></b>.
+
+```java
+verify(mockedclass, howMany).methodname(args)
+```
+
+il parametro `howmany`, <b><u>specifica il numero di volte che il metodo associato all'oggetto mockato deve essere chiamato</u></b> durante l'esecuzione del test. Abbiamo diverse opzioni : 
+ - `times(n)` = verifica che `methodname()` si stato chiamato `n` volte. 
+ - `never` = verifica che `methodname()` non sia mai stato chiamato 
+ - `atLeastOnece()` = verifica che `methodName()` sia chiamato almeno una volta. 
+ - `atLeast(n)` = verifica che `methodName()`, venga chiamato almeno `n` volte
+ - `atMost(n)` = verifica che `methodName()`, venga chiamato al massimo `n` volte 
+
+`inOrder()` := <b><u>Verifica l'ordine delle occorenze delle chiamate ai metodi di un oggetto</u></b> . 
+```java
+InOrder inO = inOrder(mock1, mock2, ...) inO.verify...
+```
+
+
+
 
 ```java
 // verificare che il metodo met di oggettoFinto sia chiamato tot volte
