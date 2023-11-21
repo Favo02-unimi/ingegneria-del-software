@@ -79,7 +79,7 @@ void newPokerHandTest(){
 }
 ```
 
-- controlli su eccezioni lanciate:
+- controlli su `Eccezioni lanciate`:
 ```java
 assertThatThrownBy(() -> puffo.metodoSbagliato())...
 // oppure
@@ -143,6 +143,24 @@ void carteTest(String carta) {
     assertThat(...).isEqualTo(TestCardUtils.toCard(carta));
 }
 ```
+## Mocking vs Spy
+
+
+- <b><u>Spy</u></b> := Permette di creare spy objects a partire da oggetti reali. <b><u> Si ottiene un oggetto che ha le stesse funzioni dell'oggetto originale</u></b> , ma che può essere utilizzato per eseguire il tracciamento delle chiamate ai suoi metodi  . 
+
+   <b><u>Un oggeto spy continuerà a chiamare il metodo reale, se non diversamente specificato</u></b>. 
+   
+   Quando devo usare uno spy mocckato utilizzo la seguente sintassi, oppure quando devo <b><u>testare un metodo con parametro di ritorno void </u></b>  : 
+
+	```java
+doReturn(iterator).when(SUT).getCards();
+```
+
+- <b><u>Mock</u></b> := si tratta di un oggetto utilizzato per creare Test Double a partire da una determinata classe o interfaccia.
+   L'oggetto creato si presenta con la stessa interfaccia del metodo mockato, ma fornisce <b><u>un implementazione minimale</u></b>. Questo si limiterà a restituire dei valori di default per il tipo di ritorno del metodo, oppure a non fare nulla se il metodo è void. 
+
+<span style=color:red>N.B</span> = Quando mocko un oggetto lo svuoto completamente. Dovrò dunque andare ad esplicitare i metodi dell'oggetto reale che voglio andare ad utilizzare tramite `thenCallRealMethod()`.
+
 
 ## Mocking
 
