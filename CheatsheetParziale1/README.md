@@ -59,6 +59,25 @@ assertThat(puffo.iterator()).toIterable()...
 .containsExactlyInAnyOrder(elem1, elem2, elem3);
 .hasSize(3);
 ```
+Esempio : 
+```java
+void newPokerHandTest(){
+	PokerHand ph = new PokerHand(
+		List.of(
+			Card.get(Rank.ACE, Suit.Clubs),
+			Card.get(Rank.Two, Suit.Clubs),
+			......
+		
+		)
+	);
+
+	asserThat((Iterable<Card>) ph ).containsExactlyInAnyOrder(
+			Card.get(Rank.ACE, Suit.Clubs),
+			Card.get(Rank.Two, Suit.Clubs),
+			......
+	)
+}
+```
 
 - controlli su eccezioni lanciate:
 ```java
