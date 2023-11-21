@@ -19,3 +19,6 @@
 [submodule "Laboratorio/is2023-lab06"]
 	path = Laboratorio/is2023-lab06
 	url = git@gitlab.di.unimi.it:alsacchi/is2023-lab06.git
+[submodule "Laboratorio/briscola"]
+	path = Laboratorio/briscola
+	url = git@github.com:Favo02/sweng-briscola.git
