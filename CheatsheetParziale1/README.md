@@ -288,6 +288,14 @@ void testGetPunti (){
 ## Dependency injection
 
 Per facilità di testing, è necessario sostituire le dipendenze dell'oggetto da testare con oggetti finti.
+InjectMocks = <b><u>prova a inniettare quello che voglio in due modi</u></b> : 
+ - <b><u>Con il costruttore</u></b>, prende quello più largo, con più prametri. Dove ho definito un parametro li passa quello, altrimenti passa un null. 
+
+ - Posso anche esplicitare attraverso il costrutto new l'oggetto INjectMocks. 
+ Lo uso quando non ho un costruttore che soddisfa l'injection che voglio fare. 
+
+Se trova un costruttore, allora la injection dovrebbe andare a buon fine. 
+( nel nostro caso falirebbe la compilazione se non setto la strategia esplicitamente).
 
 ```java
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -307,6 +315,49 @@ public class MazziereTest {
     Puffo SUT; // oggetto da testare
 
 	...
+}
+```
+esempio : 
+
+```java
+public class gicatroe(){
+
+private final List<Card> mano; 
+private final Mazziere banco;
+
+
+public void gioca(){
+	//controllo anche di non chiamare la strategia se ho già sballato.
+	// se non sono arrivato ancora a 21 chiedo una carta. 
+	while(getPunti() < 21 && strategia.chiediCarta()){ 
+		vat carta = banco.draw();
+		mano.add(carta);
+	}
+}
+}
+```
+
+```java
+public testGioca{
+
+	@Mock Mazziere banco; 
+	@Mock Strategia strat;
+	@InjectsMock Sfidante SUT; 
+
+	@test
+	void giocaTest(){
+		when(strat.chiediCarta()).thenReturn(true,true,false);
+		when(banco.draw()).thenReturn(Card.get(Rank.ACE,SUITS.club))
+		//ritorna sempre l'asso.
+		
+		SUT.setStrategia(strat);
+		SUT.carteIniziali();
+		SUT.gioca
+		
+		asserThat(SUT.getCard()).toIterable().hasSize(4);
+		verify(banco,times(4)).draw(); //controllo che drwa è stato chiamto 4 volte, banco è un oggetto mockato. 
+	
+	}
 }
 ```
 
