@@ -287,7 +287,7 @@ void testGetPunti (){
 
 ## Dependency injection
 
-Per facilità di testing, è necessario sostituire le dipendenze dell'oggetto da testare con oggetti finti.
+Per facilità di testing, è necessario sostituire le dipendenze dell'oggetto da testare con oggetti finti.<br>
 InjectMocks = <b><u>prova a inniettare quello che voglio in due modi</u></b> : 
  - <b><u>Con il costruttore</u></b>, prende quello più largo, con più prametri. Dove ho definito un parametro li passa quello, altrimenti passa un null. 
 
