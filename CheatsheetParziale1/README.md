@@ -8,6 +8,11 @@
 - [Dependency injection](#dependency-injection)
 - [Decoratori `BeforeEach`, `Nested`](#decoratori-beforeeach-nested)
 - [Pattern](#pattern)
+- Esempi di utilizzo:
+	- [MazziereTest.java](./CodiceEsempi/MazziereTest.java) _(parametrized test, mock, dependency injection)_
+	- [SfidanteTest.java](./CodiceEsempi/SfidanteTest.java) _(parametrized test, mock, dependency injection, thenAnswer)_
+	- [FattoriaTest.java](./CodiceEsempi/FattoriaTest.java) _(doAnswer, spy)_
+	- [TestCardUtils.java](./CodiceEsempi/TestCardUtils.java) _(utils per parametrized test)_
 
 ## Testing
 
@@ -110,8 +115,6 @@ public static Card toCard(String cardString) {
 }
 ```
 
-_Classe completa: [TestCardUtils.java](./CodiceEsempi/TestCardUtils.java)_
-
 ```java
 @ParameterizedTest
 @CsvSource({
@@ -129,7 +132,6 @@ Il mocking è la costruzione di oggetti finti (gli oggetti NON da testare), da u
 ```java
 import org.mockito.Mockito;
 
-
 // oggetto finto, dipendenza dell'oggetto da testare
 Puffo puffoMockato = Mockito.mock(Puffo.class);
 
@@ -142,6 +144,15 @@ Mockito.when(puffoMockato.colore()).thenReturn("Blu", "Verde", "Giallo");
 // restituire uno alla volta gli elementi di una lista
 Mockito.when(mazziereMockato.hit())
         .thenAnswer(AdditionalAnswers.returnsElementsOf(lista));
+// simulare la modifica dello stato della classe mockata
+// dopo che viene chiamato mazziereMockato.setNome() viene impostato
+// come risultato di getNome il primo argomento di setNome()
+Mockito.doAnswer((Answer<Void>) invocation -> {
+	Object[] args = invocation.getArguments();
+	String nome = (String) args[0];
+	when(mazziereMockato.getName()).thenReturn(nome);
+	return null;
+}).when(mazziereMockato).setNome(Mockito.anyString());
 ```
 
 Il mocking è utile anche per testare metodi default di interfacce.
@@ -158,7 +169,7 @@ Mockito.when(inter.metodo()).thenCallRealMethod();
 assertThat(inter.metodo()).isEqualTo(...);
 ```
 
-È possibile verificare anche proprietà sui metodi finti.
+È possibile verificare anche proprietà sui metodi finti, questo è utile per verificare che metodi `void` vengano chiamati.
 
 ```java
 // verificare che il metodo met di oggettoFinto sia chiamato tot volte
@@ -219,6 +230,7 @@ class PuffoTest {
 
 		@Mock
 	    Dipendenza dip;
+	    // mettendo @Mock non è necessario chiamare Mockito.mock(Dipendenza.class)
 
 	    @InjectMocks
 		Puffo SUT;
@@ -246,11 +258,11 @@ class PuffoTest {
 }
 ```
 
-Esempi completi di utilizzo: [MazziereTest.java](./CodiceEsempi/MazziereTest.java), [SfidanteTest.java](./CodiceEsempi/SfidanteTest.java)
-
 ## Pattern
 
 - [Chain of responsability](./Pattern/ChainOfResponsability.md)
 - [Flyweight](./Pattern/Flyweight.md)
 - [Iterator](./Pattern/Iterator.md)
+- [Null Object](./Pattern/NullObject.md)
 - [Singleton](./Pattern/Singleton.md)
+- [Strategy](./Pattern/Strategy.md)
