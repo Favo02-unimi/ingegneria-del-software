@@ -59,6 +59,7 @@ assertThat(puffo.iterator()).toIterable()...
 .containsExactlyInAnyOrder(elem1, elem2, elem3);
 .hasSize(3);
 ```
+
 Esempio : 
 ```java
 void newPokerHandTest(){
@@ -230,14 +231,59 @@ il parametro `howmany`, <b><u>specifica il numero di volte che il metodo associa
 InOrder inO = inOrder(mock1, mock2, ...) inO.verify...
 ```
 
-
-
-
 ```java
 // verificare che il metodo met di oggettoFinto sia chiamato tot volte
 Mockito.verify(oggettoFinto, Mockito.times(4)).met();
 Mockito.verify(oggettoFinto, Mockito.atLeast(2))).met();
 ```
+
+## Usare iteratore nei test
+
+<b><u>Quando voglio andare ad usare un iteratore in un test mokkandolo</u></b>, mi devo ricordare di usare il seguente codice : 
+
+```java
+import static org.mockito.Mockito.when;  
+import org.junit.jupiter.api.extension.ExtendWith;  
+import org.mockito.junit.jupiter.MockitoExtension;  
+import org.mockito.stubbing.Answer;  
+import java.util.Iterator;  
+import java.util.List;  
+  
+public class MockUtils {  
+    @SafeVarargs  
+    public static <T> void whenIterated(Iterable<T> p, T... d) {  
+        when(p.iterator()).thenAnswer(
+	        (Answer<Iterator<T>>) invocation -> List.of(d).iterator()
+	    );  
+    }  
+  
+}
+```
+Esempio pratico applicato al testing di getPunti in sfidante: 
+
+```java
+@Test  
+void testGetPunti (){  
+    Sfidante SUT = mock(Sfidante.class);  
+    when(SUT.getPunti()).thenCallRealMethod();  
+    List<Card> mano = List.of(  
+            Card.get(Rank.ACE, Suit.DIAMONDS),  
+            Card.get(Rank.ACE,Suit.CLUBS),  
+            Card.get(Rank.EIGHT,Suit.DIAMONDS)  
+    );  
+    
+    /* 
+	   when(SUT.getCards()).thenAnswer(
+		(Answer<Iterator<Card>>) invocation -> mano.iterator()
+	   );  
+    */
+    when(SUT.getCards()).thenAnswer(invocation -> mano.iterator());  
+    
+    assertThat(SUT.getPunti()).isEqualTo(20);  
+    assertThat(SUT.getPunti()).isEqualTo(20);  
+}
+```
+
 
 ## Dependency injection
 
