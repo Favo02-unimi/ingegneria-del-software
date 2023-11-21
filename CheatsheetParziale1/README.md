@@ -152,8 +152,8 @@ void carteTest(String carta) {
    
    Quando devo usare uno spy mocckato utilizzo la seguente sintassi, oppure quando devo <b><u>testare un metodo con parametro di ritorno void </u></b>  : 
 
-	```java
-doReturn(iterator).when(SUT).getCards();
+```java
+	doReturn(iterator).when(SUT).getCards();
 ```
 
 - <b><u>Mock</u></b> := si tratta di un oggetto utilizzato per creare Test Double a partire da una determinata classe o interfaccia.
