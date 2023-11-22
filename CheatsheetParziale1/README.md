@@ -11,9 +11,9 @@
 - [Mocking](#mocking)
 	- `when().thenReturn()`
 	- `when().thenAnswer()`: per iteratori
-	- `doReturn().when()`: per metodi `void`
+	- `doAnswer().when()`: per metodi `void`
 	- `thenCallRealMethod()`: per interfacce
-	- `verify`: numero chiamate
+	- `verify`: numero chiamate (con `times` e `clearInvocations`)
 	- `inOrder`: ordine chiamate
 	- `ArgumentCaptor`: parametri chiamate
 - [Spy](#spy)
@@ -82,7 +82,7 @@ assertThat(puffo.iterator()).toIterable()...
 .containsExactly(elem1, elem2, elem3);
 .containsExactlyInAnyOrder(elem1, elem2, elem3);
 .hasSize(3);
-.containsExactly(list.toArray(new Object[0]));
+.containsExactlyElementsOf(list);
 ```
 
 - controlli su `Eccezioni lanciate`:
@@ -158,7 +158,7 @@ void carteTest(String carta) {
     void iterableTest(String cards) {
         List<Card> cardList = TestCardUtils.fromStringList(cards);
         ...
-        assertThat((Iterable<Card>) SUT).containsExactly(cardList.toArray(new Card[0]));
+        assertThat((Iterable<Card>) SUT).containsExactlyElementsOf(cardList);
     }
 ```
 
@@ -255,10 +255,16 @@ Il parametro `howmany` specifica il **numero di volte** che il metodo dell'ogget
  - `atLeast(n)` = verifica che `methodName()`, venga chiamato almeno `n` volte
  - `atMost(n)` = verifica che `methodName()`, venga chiamato al massimo `n` volte
 
+In caso vengano effettuate delle chiamate per setup o in generale per "resettare" il conteggio delle chiamate si può usare `clearInvocations(mocked)`.
+
 ```java
 // verificare che il metodo met di oggettoFinto sia chiamato tot volte
-Mockito.verify(oggettoFinto, Mockito.times(4)).met();
-Mockito.verify(oggettoFinto, Mockito.atLeast(2))).met();
+verify(oggettoFinto, times(4)).met();
+verify(oggettoFinto, atLeast(2))).met();
+
+clearInvocations(oggettoFinto);
+
+verify(oggettoFinto, never()).met();
 ```
 
 È possibile verificare **l'ordine delle chiamate**, attraverso `inOrder`:
@@ -342,7 +348,7 @@ import org.junit.jupiter.api.BeforeEach;
 @BeforeEach
 void init() {
 	// viene eseguito prima di ogni test
-    Mockito.when(dip.metodo()).thenReturn(42);
+    when(dip.metodo()).thenReturn(42);
     SUT.metodoComuneATuttiITest();
 }
 ```
@@ -367,7 +373,7 @@ class PuffoTest {
 
 		@BeforeEach
 		void init() {
-			Mockito.when(dip.metodo()).thenReturn(42);
+			when(dip.metodo()).thenReturn(42);
 		    SUT.metodoComuneATuttiITest();
 		}
 
