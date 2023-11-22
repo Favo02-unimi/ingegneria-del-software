@@ -311,9 +311,9 @@ assertThat(...);
 
 Per facilità di testing, spesso è necessario sostituire le **dipendenze** dell'oggetto da testare con **oggetti finti**.
 
-Mockito mette a disposizione il decoratore `@InjectMocks`, che appunto **inietta** delle dipendenze dentro l'oggetto, in due modi:
- - attraverso il **costruttore**, prende quello più _"largo"_, con più parametri. Se è presente un `@Mock` che rispetta l'argomento viene passato quello, altrimenti `null`
- - quando non esiste un costruttore Mockito sfrutta le **reflections** (i campi da iniettare **non devono** essere `final`), iniettando le dipendenze
+Mockito mette a disposizione il decoratore `@InjectMocks`, che appunto **inietta** delle dipendenze (tutti gli oggetti con decoratore `@Mock`) dentro l'oggetto, in due modi:
+ - attraverso il **costruttore** più _"largo"_ (quello con più parametri), anche se questo costruttore non lavora sulle dipendenze da iniettare
+ - quando non esiste un costruttore, le dipendenze vengono iniettate attraverso le **reflections** (i campi da iniettare **non devono** essere `final`)
 
 Per utilizzare `@InjectMocks` la classe deve avere il **decoratore** `@ExtendWith(MockitoExtension.class)`.
 
@@ -324,17 +324,26 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+class Puffo {
+	private List<Integer> nums;
+	private String nome;
+	public Puffo(String nome) { this.nome = nome; }
+}
 
 @ExtendWith(MockitoExtension.class)
-public class MazziereTest {
+class Test {
+	@Mock List<Integer> nums;
 
-    @Mock
-    Dipendenza dip; // dipendenza che verrà iniettata nell'oggetto SUT
+	// NON verrà iniettato nums dato che il costruttore più grande
+	// quello (con parametro solo String) non imposta nums
+	@InjectMocks Puffo puffo;
 
-    @InjectMocks
-    Puffo SUT; // oggetto da testare
+	// verrà iniettato nums, dato che il costruttore è già stato chiamato
+	// quindi verranno usate le reflections
+	@InjectMocks Puffo puffo = new Puffo("grande puffo");
 
-	...
+	@Test
+	void ... { ... }
 }
 ```
 
