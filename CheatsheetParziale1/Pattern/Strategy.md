@@ -1,33 +1,40 @@
-### Strategy pattern
+## Strategy
 
-<span style=color:green>Obbiettivo</span> :=  Talvolta nelle nostre classi vogliamo definire dei <b><u>comportamenti diversi per istanza diverse</u></b>, tutta via la normale gerarchia di classi non va bene. <span style=color:red>Violerrebbe i principi di Sostituzione di liskov e Opne Close</span>.
+### Obiettivo
 
-*Esempio* :
-Definiamo più algoritmi e <b><u>lasciamo che l'applicazione client passi l'algoritmo da utilizzare come parametro</u></b>. Uno dei migliori esempi di modello di strategia è `Collections.sort()`il metodo che accetta il parametro Comparator. In base alle diverse implementazioni delle interfacce del Comparatore, gli oggetti vengono ordinati in modi diversi
+Talvolta nelle nostre classi vogliamo definire dei **comportamenti diversi** per **istanze diverse**, tuttavia la normale gerarchia di classi non va bene: verrebbero violati i principi di **Sostituzione di Liskov** e **Open Closed**.
 
-<span style=color:cyan>Soluzione</span> := <span style=color:yellow>Principio di delega</span>, <b><u>che sostituisce all'eriditarietà la composizione</u></b>. Si tratta di individuare ciò che rimane invariato e ciò che rimane fisso nell'applicazione. Si creano :
- - <b><u>Si creano delle interfaccie per i comportamenti da diversificare</u></b>
+_Esempio:_
 
- - <b><u>Si crea una classe concreta che usa ogni comportamento possibile</u></b>
+Definiamo più algoritmi e lasciamo che l'_applicazione client_ passi l'_algoritmo da utilizzare come parametro_.
 
-All’interno della classe originale si introducono dunque degli <span style=color:cyan>attributi di comportamento</span> , <b><u>impostati al momento della costruzione</u></b> o con dei setter a seconda della dinamicità che vogliamo permettere.
-<b><u>Quando viene richiesto il comportamento a tale classe essa si limiterà a chiamare il proprio “oggetto di comportamento”</u></b>.
+Uno dei migliori esempi di modello di strategia è `Collections.sort()`, il metodo che accetta il parametro `Comparator`. In base alle diverse implementazioni delle interfacce del comparatore, gli oggetti vengono ordinati in modi diversi.
 
-![Duck](img/duck.png)
+### Come
 
-Nell'esempio non c'è scritto da nessuna parte che un anatra devo volare, ma solo che deve implementare la sua politica di volo.
+**Principio di delega**: sostituisce all'_ereditarietà_ la **composizione**. Si tratta di individuare ciò che _rimane invariato_ e ciò che _rimane fisso_ nell'applicazione. Si creano:
 
-<span style=color:cyan;font-size:30px>Esempio con Shopping Cart</span>
+- si creano delle **interfacce** per i comportamenti da **diversificare**
+- si crea una **classe concreta** che usa ogni **comportamento** possibile
 
-Implementeremo ora un carrello della spesa. Il carrello della spesa oltre a contenere una serie di item, dovrà disporre un <span style=color:cyan>attributo di comportamento</span> che esegue un pagamento.
-Un pagamento può essere implementato da due strategie :
-- <b><u>Pagamento con paypall</u></b>
-- <b><u>Pagamento con carta di credito</u></b>
+All'interno della classe originale si introducono dunque degli **attributi di comportamento**, impostati al **momento della costruzione** o con dei setter a seconda della dinamicità che vogliamo permettere. Quando viene richiesto il comportamento a tale classe essa si limiterà a **chiamare il proprio** _oggetto di comportamento_.
 
-![kart](img/market.png)
+![Duck](img/Strategy-1.png)
 
-<span style=color:orange>Classe shopping Cart</span>  :
-``` java
+Nell'esempio non c'è scritto da nessuna parte che un anatra devo _volare_, ma solo che deve implementare la sua _politica di volo_.
+
+### Esempio (shopping cart)
+
+Il carrello della spesa oltre a contenere una serie di item, dovrà disporre un **attributo di comportamento** che esegue un _pagamento_.
+
+Un pagamento può essere implementato da due strategie:
+
+- pagamento con PayPal
+- pagamento con carta di credito
+
+![Cart](img/Strategy-2.png)
+
+```java
 public class ShoppingCart {
 
 	List<Item> items;
@@ -36,9 +43,9 @@ public class ShoppingCart {
 		this.items = new ArrayList<Item>();
 	}
 
-	//in questo caso l'attributo comportamentale, viene scelto   tramite un setter, consente una maggiore dinamicità
-	//il metodo prenderà un metodo di pagamento generico e si limiterà a chiamarlo.
-	public void performPayment(PaymentStrategy paymentMethod){
+	// l'attributo comportamentale viene scelto tramite un setter, consente una maggiore dinamicità
+	// il metodo prenderà un metodo di pagamento generico e si limiterà a chiamarlo.
+	public void performPayment(PaymentStrategy paymentMethod) {
 		int amount = calculateTotal();
 		paymentMethod.pay(amount);
 	}
@@ -51,22 +58,23 @@ public class ShoppingCart {
 		return sum;
 	}
 
-	public void add(Item item)
-	public void remove(Item item).....
-
+	public void add(Item item) { ... }
+	public void remove(Item item) { ... }
 
 }
 ```
 
-<span style=color:yellow>Interfaccia strategia di pagamento</span>:
-``` java
+Interfaccia strategia di pagamento:
+
+```java
 public interface PaymentStrategy {
 	public void pay(int amount);
 }
 ```
 
-<span style=color:red>strategia paga con carta</span>. Implementa il metodo di pagamento pay, specializzandolo per pagare con una carta di credito.
-``` java
+Strategia paga con carta, implementa il metodo di pagamento pay, specializzandolo per pagare con una carta di credito.
+
+```java
 public class CreditCardStrategy implements PaymentStrategy {
 
 	private String name;
@@ -83,14 +91,14 @@ public class CreditCardStrategy implements PaymentStrategy {
 
 	@Override
 	public void pay(int amount) {
-		System.out.println(amount +" paid with credit/debit card");
+		System.out.println(amount +" paid using credit/debit card");
 	}
 
 }
 ```
 
-<span style=color:red>strategia paga con paypall</span>
-``` java
+Strategia paga con PayPal
+```java
 public class PaypalStrategy implements PaymentStrategy {
 
 	private String emailId;
@@ -103,7 +111,7 @@ public class PaypalStrategy implements PaymentStrategy {
 
 	@Override
 	public void pay(int amount) {
-		System.out.println(amount + " paid using Paypal.");
+		System.out.println(amount + " paid using Paypal");
 	}
 
 }
