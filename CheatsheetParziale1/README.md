@@ -423,7 +423,7 @@ class Test {
 
 ## Pattern
 
-- [Chain of responsability](./Pattern/ChainOfResponsability.md)
+- [Chain of responsibility](./Pattern/ChainOfResponsibility.md)
 - [Flyweight](./Pattern/Flyweight.md)
 - [Iterator](./Pattern/Iterator.md)
 - [Null Object](./Pattern/NullObject.md)
