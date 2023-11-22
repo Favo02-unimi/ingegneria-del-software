@@ -1,28 +1,7 @@
-package it.unimi.di.sweng.blackjack;
-
-import ca.mcgill.cs.stg.solitaire.cards.Card;
-import ca.mcgill.cs.stg.solitaire.cards.Rank;
-import ca.mcgill.cs.stg.solitaire.cards.Suit;
-
-import java.util.ArrayList;
-import java.util.List;
-
 public class TestCardUtils {
 
-    public static List<Card> fromStringList(String cardsString) {
-        String[] tokens = cardsString.split(" ");
-        List<Card> cards = new ArrayList<>();
-        for (String s : tokens)
-            cards.add(toCard(s));
-        return cards;
-    }
-
-    public static Card toCard(String cardString) {
-        char cRank = cardString.charAt(0);
-        char cSuit = cardString.charAt(1);
-
-        Rank rank;
-        rank = switch (cRank) {
+    public static Rank toRank(char cRank) {
+        return switch (cRank) {
             case '1', 'A' -> Rank.ACE;
             case '2' -> Rank.TWO;
             case '3' -> Rank.THREE;
@@ -38,18 +17,31 @@ public class TestCardUtils {
             case 'K' -> Rank.KING;
             default -> throw new IllegalArgumentException("invalid rank");
         };
+    }
 
-        Suit suit;
-        suit = switch (cSuit) {
+    public static Suit toSuit(char cSuit) {
+        return switch (cSuit) {
             case 'C' -> Suit.CLUBS;
             case 'S' -> Suit.SPADES;
             case 'D' -> Suit.DIAMONDS;
             case 'H' -> Suit.HEARTS;
             default -> throw new IllegalArgumentException("invalid suit");
         };
+    }
+
+    public static Card toCard(String cardString) {
+        Rank rank = toRank(cardString.charAt(0));
+        Suit suit = toSuit(cardString.charAt(1));
 
         return Card.get(rank, suit);
     }
 
+    public static List<Card> toCardList(String cardsString) {
+        String[] tokens = cardsString.split(" ");
+        List<Card> cards = new ArrayList<>();
+        for (String s : tokens)
+            cards.add(toCard(s));
+        return cards;
+    }
 
 }

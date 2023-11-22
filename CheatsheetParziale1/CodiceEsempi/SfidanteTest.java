@@ -1,5 +1,3 @@
-package it.unimi.di.sweng.blackjack;
-
 import it.unimi.di.sweng.blackjack.strategie.BetweenThirteenAndSixteenAndMoreThanSevenStrategy;
 import it.unimi.di.sweng.blackjack.strategie.LessThanElevenStrategy;
 import it.unimi.di.sweng.blackjack.strategie.Strategia;
