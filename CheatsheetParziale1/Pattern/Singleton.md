@@ -1,56 +1,61 @@
-Talvolta vorremmo che un certo oggetto, esistesse in <span style=color:yellow>una sola istanza</span>, perchè di tale oggetto non ha senso esistano diverse copie all'interno dell'applicazione (*diverse istanze di una classe Gioco, in un sistema che gestice un gioco alla volta*).
+## Singleton
 
-Tutta via i linguaggi Object Oriented, gestiscono solamente classi con istanze multiple, la realizzazione dell'unicità può risultare dunque critica.
+### Obiettivo
 
-<span style=color:green>Obbiettivo</span> := <b><u>Rendere la classe responsabile del fatto che non può esistere più di una sua istanza</u></b>
+Talvolta vorremmo che un certo oggetto, esistesse in **una sola istanza**, perché di tale oggetto non ha senso esistano _diverse copie_ all'interno dell'applicazione.
 
-<span style=color:cyan>Come</span> := Rendere privato il costruttore ( o se non privato, almeno protected ). Bisogna però garantire un modo per recuperare l'unica istanza disponibile della classe, <b><u>si crea dunque il metodo statico</u></b> <span style=color:yellow>getInstance</span>.
+_Tuttavia i linguaggi Object Oriented, gestiscono solamente classi con istanze multiple, la realizzazione dell'unicità può risultare dunque critica._
 
-<span style=color:yellow>getInstance</span> := Restituisce a chi lo chiama l'unica istanza della classe, creandola tramite il costruttore privato se questa non è già presente.
-<b><u>L'istanza è memorizzata in una attributo statico della classe</u></b>, così da poterla restituire a chi ne ha bisogno.
+Quindi è necessario rendere la **classe stessa responsabile** del fatto che non può esistere più di una sua istanza.
+
+### Come
+
+Rendere **privato il costruttore**.
+
+Bisogna però garantire un modo per **recuperare** l'unica **istanza** disponibile della classe, si crea dunque il metodo statico `getInstance`. Il metodo restituisce l'unica istanza della classe, **creandola** tramite il costruttore privato **se questa non è già presente**.
+
+L'istanza è memorizzata in una **attributo statico** della classe, così da poterla restituire.
 
 ![Singleton](img/Singleton-1.png)
 
 ```java
 public class Singleton {
-	/* costruttore  privato o comunque non pubblico*/
-	protected Singleton() { ... }
+	// salvo l'istanza per usarla dopo
+	private static Singleton instance;
 
-	/* salvo l'istanza per usarla dopo */
-	private static Singleton instance = null;
+	// costruttore privato
+	private Singleton() { ... }
 
-	/* metodo statico*/
+	// getter statico
 	public static Singleton getInstance() {
 		if (instance == null) {
 			instance = new Singleton();
 		}
 		return instance;
 	}
-
-	public void metodoIstanza() { ... } }
+}
 ```
 
-<span style=color:red;font-size:30px;>Problematiche</span>:
-Tutta via per come è stata scritta la classe, <b><u> non prende in considerazione la concorrenza</u></b>. Se due processi accedono in modo concorrente la metodo <span style=color:yellow>getInstance</span>, entrambi passano il controllo `instance == null`, in quanto non è ancora creata e assegnata al relativo attributo statico nell'altro processo.
+In java è anche possibile utilizzare gli **ENUM**. L'oggetto viene definito attraverso un enumerativo con un **unico valore**, l'**istanza**.
 
-<span style=color:green;font-size:30px;>Soluzioni</span>:
-- Lock sull'esecuzione del metodo, anteponendo la direttiva `@Synchronized`. Non utilizzata in quanto avremo un calo di prestazioni.
+Ciascun valore di un ENUM viene trattato nativamente da java come un Singleton:
 
-- In java è possibile utilizzare gli <span style=color:yellow>ENUM</span>.
-  l'oggetto viene definito attraverso un enumerativo con un unico valore, l'istanza.
-  Ciascun valore di un enum viene trattato nativamente da java come un Singleton :
-  - <b><u>Viene creato al suo primo uso</u></b>.
-  - <b><u>Non ne siste più di una copia</u></b>.
-  - Chiunque vi acceda, <b><u>accede sempre alla medesima istanza</u></b> .
+- viene creato al suo **primo uso**
+- **non** ne siste più di una copia
+- chiunque vi acceda, accede sempre alla **medesima istanza**
 
-All'interno di un enum è inoltre possibile creare attributi e metodi.
-Questo approccio è <b><u>thread safe</u></b>, ovvero non abbiamo problemi di concorrenza.
+All'interno di un ENUM è inoltre possibile creare **attributi** e **metodi**.
+
+Questo approccio è **thread safe**, ovvero non abbiamo problemi di concorrenza.
 
 ```java
 public enum MySingleton {
 	INSTANCE;
-	public void metodoIstanza() { ... }
 }
-MySingleton.INSTANCE.sampleOp();
 ```
 
+### Problematiche
+
+Per come è stata scritta la classe, non viene presa in considerazione la **concorrenza**. Se due processi accedono in modo **concorrente** al metodo `getInstance`, entrambi passano il controllo `instance == null`, in quanto non è ancora creata e assegnata al relativo attributo statico nell'altro processo, creando due istanze.
+
+Soluzione: lock sull'esecuzione del metodo, anteponendo la direttiva `@Synchronized`. _Non utilizzata in quanto avremo un calo di prestazioni._
