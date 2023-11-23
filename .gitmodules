@@ -22,3 +22,6 @@
 [submodule "Laboratorio/briscola"]
 	path = Laboratorio/briscola
 	url = git@github.com:Favo02/sweng-briscola.git
+[submodule "Laboratorio/is2023-lab07"]
+	path = Laboratorio/is2023-lab07
+	url = git@gitlab.di.unimi.it:Favo02/is2023-lab07.git
