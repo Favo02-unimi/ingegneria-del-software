@@ -25,3 +25,9 @@
 [submodule "Laboratorio/is2023-lab07"]
 	path = Laboratorio/is2023-lab07
 	url = git@gitlab.di.unimi.it:Favo02/is2023-lab07.git
+[submodule "Laboratorio/is2023-lab08"]
+	path = Laboratorio/is2023-lab08
+	url = git@gitlab.di.unimi.it:martina.provini/is-2023-lab-08-personal.git
+[submodule "Laboratorio/is2023-lab09"]
+	path = Laboratorio/is2023-lab09
+	url = git@gitlab.di.unimi.it:Favo02/is2023-lab09.git
