@@ -2,7 +2,7 @@
 	path = AppuntiSilabGVNG
 	url = git@github.com:MarcoBuster/sweng.git
 [submodule "Laboratorio/2023-lab01"]
-	path = Laboratorio/2023-lab01
+	path = Laboratorio/is2023-lab01
 	url = git@gitlab.di.unimi.it:Favo02/2023-lab01.git
 [submodule "Laboratorio/is2023-lab02"]
 	path = Laboratorio/is2023-lab02
@@ -11,7 +11,7 @@
 	path = Laboratorio/is2023-lab03
 	url = git@gitlab.di.unimi.it:Favo02/is2023-lab03.git
 [submodule "Laboratorio/2023-lab04"]
-	path = Laboratorio/2023-lab04
+	path = Laboratorio/is2023-lab04
 	url = git@gitlab.di.unimi.it:Favo02/2023-lab04.git
 [submodule "Laboratorio/is2023-lab05"]
 	path = Laboratorio/is2023-lab05
