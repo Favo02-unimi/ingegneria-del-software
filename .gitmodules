@@ -31,3 +31,15 @@
 [submodule "Laboratorio/is2023-lab09"]
 	path = Laboratorio/is2023-lab09
 	url = git@gitlab.di.unimi.it:Favo02/is2023-lab09.git
+[submodule "Laboratorio/is2023-lab10"]
+	path = Laboratorio/is2023-lab10
+	url = git@gitlab.di.unimi.it:alsacchi/is2023-lab10.git
+[submodule "Laboratorio/is2023-lab11"]
+	path = Laboratorio/is2023-lab11
+	url = git@gitlab.di.unimi.it:Favo02/is2023-lab11.git
+[submodule "Laboratorio/is2023-lab12"]
+	path = Laboratorio/is2023-lab12
+	url = git@gitlab.di.unimi.it:Favo02/is2023-lab12.git
+[submodule "Laboratorio/stazione-dei-treni"]
+	path = Laboratorio/stazione-dei-treni
+	url = git@gitlab.di.unimi.it:Favo02/stazione-dei-treni.git
