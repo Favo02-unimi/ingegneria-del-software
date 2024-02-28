@@ -8,10 +8,18 @@ _I moduli delle esercitazioni non sono accessibili in quanto hostati su un'istan
 
 ### Cheatsheet per esami
 
-- [**Parziale 1**](/CheatsheetParziale1/README.md):
-  - [Testing](./CheatsheetParziale1/README.md#testing)
-  - [Testing parametrico](./CheatsheetParziale1/README.md##testing-parametrico)
-  - [Mocking](./CheatsheetParziale1/README.md##mocking)
-  - [Dependency injection](./CheatsheetParziale1/README.md##dependency-injection)
-  - [Decoratori `BeforeEach`, `Nested`](./CheatsheetParziale1/README.md##decoratori-beforeeach-nested)
-  - [Pattern](./CheatsheetParziale1/README.md##pattern)
+- [**Laboratorio**](/CheatsheetLaboratorio/README.md):
+  - [Testing](./CheatsheetLaboratorio/README.md#testing)
+  - [Testing parametrico](./CheatsheetLaboratorio/README.md##testing-parametrico)
+  - [Mocking](./CheatsheetLaboratorio/README.md##mocking)
+  - [Dependency injection](./CheatsheetLaboratorio/README.md##dependency-injection)
+  - [Decoratori `BeforeEach`, `Nested`](./CheatsheetLaboratorio/README.md##decoratori-beforeeach-nested)
+  - [Pattern](./CheatsheetLaboratorio/README.md##pattern)
+
+- [**Teoria (orale)**](/CheatsheetTeoria/):
+  - [01_introduzione](./CheatsheetTeoria/01_introduzione.md)
+  - [02_modelli_di_ciclo_di_vita](./CheatsheetTeoria/02_modelli_di_ciclo_di_vita.md)
+  - [03_extreme_programming](./CheatsheetTeoria/03_extreme_programming.md)
+  - [11_verifica_e_convalida](./CheatsheetTeoria/11_verifica_e_convalida.md)
+  - [12_testing_e_criteri_di_selezione](./CheatsheetTeoria/12_testing_e_criteri_di_selezione.md)
+  - [15_reti_di_petri](./CheatsheetTeoria/15_reti_di_petri.md)
