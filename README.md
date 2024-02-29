@@ -22,4 +22,6 @@ _I moduli delle esercitazioni non sono accessibili in quanto hostati su un'istan
   - [03_extreme_programming](./CheatsheetTeoria/03_extreme_programming.md)
   - [11_verifica_e_convalida](./CheatsheetTeoria/11_verifica_e_convalida.md)
   - [12_testing_e_criteri_di_selezione](./CheatsheetTeoria/12_testing_e_criteri_di_selezione.md)
+  - [13_analisi_statica](./CheatsheetTeoria/13_analisi_statica.md)
+  - [14_techiche_di_review](./CheatsheetTeoria/14_techiche_di_review.md)
   - [15_reti_di_petri](./CheatsheetTeoria/15_reti_di_petri.md)
